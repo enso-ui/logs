@@ -1,7 +1,7 @@
 <template>
-    <card class="is-rounded raises-on-hover"
+    <card class="is-rounded log-show-card"
         v-if="log">
-        <card-header class="has-background-light">
+        <card-header class="log-show-header">
             <template #title>
                 <p>
                     {{ i18n('The log file') }}
@@ -16,21 +16,21 @@
                 <card-control>
                     <a class="icon is-small has-text-info"
                         :href="route('system.logs.download', log.name)">
-                        <fa icon="cloud-download-alt"/>
+                        <fa :icon="faCloudArrowDown"/>
                     </a>
                 </card-control>
                 <card-control>
                     <confirmation placement="bottom"
                         @confirm="empty(log)">
                         <span class="icon is-small has-text-danger">
-                            <fa icon="trash-alt"/>
+                            <fa :icon="faTrashCan"/>
                         </span>
                     </confirmation>
                 </card-control>
                 <card-refresh @refresh="fetch()"/>
             </template>
         </card-header>
-        <card-content class="is-paddingless"
+        <card-content class="p-0"
             :key="log.modified">
             <pre class="log"
                 v-hljs>
@@ -44,16 +44,13 @@
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCloudDownloadAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCloudArrowDown, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import {
     Card, CardHeader, CardRefresh, CardControl, CardContent,
 } from '@enso-ui/card/bulma';
 import Confirmation from '@enso-ui/confirmation/bulma';
 import { hljs } from '@enso-ui/directives';
 import formatDistance from '@enso-ui/ui/src/modules/plugins/date-fns/formatDistance';
-
-library.add(faCloudDownloadAlt, faTrashAlt);
 
 export default {
     name: 'Show',
@@ -73,6 +70,8 @@ export default {
     inject: ['errorHandler', 'http', 'i18n', 'route', 'toastr'],
 
     data: () => ({
+        faCloudArrowDown,
+        faTrashCan,
         log: null,
         content: null,
     }),
@@ -101,11 +100,97 @@ export default {
 };
 </script>
 
-<style src="highlight.js/styles/atom-one-light.css"></style>
-
 <style lang="scss">
+    .log-show-header {
+        color: var(--bulma-text);
+
+        .card-header-title,
+        .card-header-icon,
+        .card-control,
+        .icon {
+            color: inherit;
+        }
+
+        .card-header-title {
+            color: var(--bulma-text-strong);
+        }
+
+        code {
+            background-color: var(--bulma-scheme-main-ter);
+            border-radius: var(--bulma-radius-small);
+            color: var(--bulma-primary);
+            padding: 0.125rem 0.375rem;
+        }
+    }
+
     pre.log {
-        background-color: unset;
-        padding: 0;
+        background-color: var(--bulma-scheme-main-bis) !important;
+        color: var(--bulma-text);
+        margin: 0;
+        min-height: 18rem;
+        padding: 1rem 1.25rem;
+    }
+
+    pre.log code {
+        background: transparent !important;
+        color: inherit !important;
+        display: block;
+        min-height: inherit;
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+
+    .hljs {
+        background: transparent !important;
+        color: var(--bulma-text) !important;
+        display: block;
+        min-height: inherit;
+    }
+
+    .hljs-comment,
+    .hljs-quote {
+        color: color-mix(in srgb, var(--bulma-text-light) 85%, #7a8699);
+    }
+
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-subst {
+        color: #ff9f6e;
+    }
+
+    .hljs-string,
+    .hljs-attribute,
+    .hljs-template-tag,
+    .hljs-template-variable {
+        color: #8ddc97;
+    }
+
+    .hljs-number,
+    .hljs-literal,
+    .hljs-variable,
+    .hljs-tag .hljs-attr {
+        color: #73c8ff;
+    }
+
+    .hljs-title,
+    .hljs-section,
+    .hljs-selector-id {
+        color: #ffd166;
+    }
+
+    .hljs-built_in,
+    .hljs-type,
+    .hljs-symbol,
+    .hljs-bullet {
+        color: #95e1d3;
+    }
+
+    .hljs-meta,
+    .hljs-deletion {
+        color: #f28482;
+    }
+
+    .hljs-addition {
+        color: #84dcc6;
     }
 </style>

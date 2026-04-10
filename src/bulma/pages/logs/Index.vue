@@ -1,13 +1,13 @@
 <template>
-    <div class="columns is-multiline"
+    <div class="columns is-multiline logs-index"
         v-if="logs.length > 0">
         <div class="column is-one-third-widescreen is-half-desktop is-full-tablet"
             v-for="(log, index) in logs"
             :key="index">
-            <card class="is-rounded raises-on-hover"
+            <card class="is-rounded logs-card"
                 collapsible
                 :loading="loading">
-                <card-header class="has-background-light">
+                <card-header class="logs-card-header">
                     <span class="icon is small">
                         <fa :icon="icon"/>
                     </span>
@@ -22,20 +22,20 @@
                                     name: 'system.logs.show',
                                     params: { log: log.name }
                                 }).catch(routerErrorHandler)">
-                                <fa icon="eye"/>
+                                <fa :icon="faEye"/>
                             </span>
                         </card-control>
                         <card-control>
                             <a class="icon is-small is-naked"
                                 :href="route('system.logs.download', log.name)">
-                                <fa icon="cloud-download-alt"/>
+                                <fa :icon="faCloudArrowDown"/>
                             </a>
                         </card-control>
                         <card-control>
                             <confirmation placement="bottom"
                                 @confirm="empty(log)">
                                 <span class="icon is-small is-naked">
-                                    <fa icon="trash-alt"/>
+                                    <fa :icon="faTrashCan"/>
                                 </span>
                             </confirmation>
                         </card-control>
@@ -68,17 +68,14 @@
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faTerminal, faEye, faCloudDownloadAlt, faTrashAlt, faSyncAlt,
+    faTerminal, faEye, faCloudArrowDown, faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
 import {
     Card, CardHeader, CardContent, CardControl, CardRefresh, CardCollapse,
 } from '@enso-ui/card/bulma';
 import Confirmation from '@enso-ui/confirmation/bulma';
 import formatDistance from '@enso-ui/ui/src/modules/plugins/date-fns/formatDistance';
-
-library.add(faTerminal, faEye, faCloudDownloadAlt, faTrashAlt, faSyncAlt);
 
 export default {
     name: 'Index',
@@ -99,6 +96,9 @@ export default {
     ],
 
     data: () => ({
+        faCloudArrowDown,
+        faEye,
+        faTrashCan,
         logs: [],
         loading: false,
     }),
@@ -136,3 +136,55 @@ export default {
     },
 };
 </script>
+
+<style lang="scss">
+.logs-index {
+    .card-header {
+        align-items: center;
+
+        .card-header-title,
+        .card-header-icon,
+        .card-control,
+        .v-popper,
+        .v-popper__popper {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .card-header-title {
+            min-height: 2.25rem;
+            color: var(--bulma-text-strong);
+        }
+
+        .card-header-icon > .v-popper,
+        .card-control > .v-popper {
+            line-height: 1;
+        }
+
+        .icon,
+        .card-control,
+        .card-header-icon {
+            color: var(--bulma-text-light);
+        }
+
+        .card-control:hover,
+        .card-control:focus,
+        .card-header-icon:hover,
+        .card-header-icon:focus {
+            color: var(--bulma-text-strong);
+        }
+    }
+
+    .card-content {
+        color: var(--bulma-text);
+    }
+
+    .card-content p + p {
+        margin-top: 0.5rem;
+    }
+
+    .is-pulled-right {
+        color: var(--bulma-text-strong);
+    }
+}
+</style>
