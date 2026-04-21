@@ -1,7 +1,7 @@
 {
   "name": "@enso-ui/logs",
   "version": "5.2.3",
-  "description": "Basic logs package",
+  "description": "System log listing and detail pages for Enso UI",
   "main": "src/bulma/pages/logs/Index.vue",
   "repository": {
     "type": "git",
