@@ -32,7 +32,8 @@
                             </a>
                         </card-control>
                         <card-control>
-                            <confirmation placement="bottom"
+                            <confirmation class="is-flex is-align-items-center"
+                                placement="bottom"
                                 @confirm="empty(log)">
                                 <span class="icon is-small is-naked">
                                     <fa :icon="faTrashCan"/>
@@ -136,55 +137,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-.logs-index {
-    .card-header {
-        align-items: center;
-
-        .card-header-title,
-        .card-header-icon,
-        .card-control,
-        .v-popper,
-        .v-popper__popper {
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .card-header-title {
-            min-height: 2.25rem;
-            color: var(--bulma-text-strong);
-        }
-
-        .card-header-icon > .v-popper,
-        .card-control > .v-popper {
-            line-height: 1;
-        }
-
-        .icon,
-        .card-control,
-        .card-header-icon {
-            color: var(--bulma-text-light);
-        }
-
-        .card-control:hover,
-        .card-control:focus,
-        .card-header-icon:hover,
-        .card-header-icon:focus {
-            color: var(--bulma-text-strong);
-        }
-    }
-
-    .card-content {
-        color: var(--bulma-text);
-    }
-
-    .card-content p + p {
-        margin-top: 0.5rem;
-    }
-
-    .is-pulled-right {
-        color: var(--bulma-text-strong);
-    }
-}
-</style>

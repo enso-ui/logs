@@ -20,7 +20,8 @@
                     </a>
                 </card-control>
                 <card-control>
-                    <confirmation placement="bottom"
+                    <confirmation class="is-flex is-align-items-center"
+                        placement="bottom"
                         @confirm="empty(log)">
                         <span class="icon is-small has-text-danger">
                             <fa :icon="faTrashCan"/>
@@ -92,27 +93,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-    .log-show-header {
-        color: var(--bulma-text);
-
-        .card-header-title,
-        .card-header-icon,
-        .card-control,
-        .icon {
-            color: inherit;
-        }
-
-        .card-header-title {
-            color: var(--bulma-text-strong);
-        }
-
-        code {
-            background-color: var(--bulma-scheme-main-ter);
-            border-radius: var(--bulma-radius-small);
-            color: var(--bulma-primary);
-            padding: 0.125rem 0.375rem;
-        }
-    }
-</style>
