@@ -1,7 +1,7 @@
 # Logs
 
 [![License](https://img.shields.io/badge/license-MIT-10b981.svg)](https://github.com/enso-ui/logs/blob/master/LICENSE)
-[![Stable](https://img.shields.io/badge/stable-5.2.3-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/logs)
+[![Stable](https://img.shields.io/badge/stable-5.2.4-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/logs)
 [![Downloads](https://img.shields.io/npm/dm/@enso-ui/logs.svg)](https://www.npmjs.com/package/@enso-ui/logs)
 [![Vue](https://img.shields.io/badge/vue-3.x-42b883.svg)](https://vuejs.org/)
 [![JavaScript](https://img.shields.io/badge/javascript-ES2020-f7df1e.svg)](https://developer.mozilla.org/docs/Web/JavaScript)
@@ -29,6 +29,7 @@ The package is usually consumed from the full `enso-ui` workspace inside an Enso
 - registers the `/system/logs` index and detail routes
 - ships a table-based listing page for available logs
 - ships a detail page for browsing one selected log file
+- highlights Laravel log content without loading Highlight.js
 - keeps the frontend shell aligned with the backend log endpoints and permissions
 
 ## Usage
@@ -64,7 +65,6 @@ The package is page-oriented. The routed pages are the practical public surface.
 
 - [`@enso-ui/card`](https://docs.laravel-enso.com/frontend/card.html) [↗](https://github.com/enso-ui/card)
 - [`@enso-ui/confirmation`](https://docs.laravel-enso.com/frontend/confirmation.html) [↗](https://github.com/enso-ui/confirmation)
-- [`@enso-ui/directives`](https://docs.laravel-enso.com/frontend/directives.html) [↗](https://github.com/enso-ui/directives)
 - [`@enso-ui/ui`](https://docs.laravel-enso.com/frontend/ui.html) [↗](https://github.com/enso-ui/ui)
 
 ## Contributions
@@ -76,4 +76,3 @@ Thank you to all the people who already contributed to Enso!
 ## License
 
 [MIT](https://github.com/enso-ui/logs/blob/master/LICENSE)
-
